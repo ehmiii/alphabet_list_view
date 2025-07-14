@@ -81,32 +81,29 @@ class _AlphabetListViewState extends State<AlphabetListView> {
           _ => null,
         };
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      textDirection: rowTextDirection,
+    return Stack(
       children: [
-        Expanded(
-          child: Stack(
-            children: [
-              AlphabetList(
-                items: _sortedItems,
-                scrollController: _scrollController,
-                alphabetListOptions: widget.options.listOptions,
-                symbolChangeNotifierList: _symbolChangeNotifierList,
-                symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
-              ),
-              AlphabetSymbolOverlay(
-                alphabetOverlayOptions: widget.options.overlayOptions,
-                symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
-              ),
-            ],
-          ),
-        ),
-        AlphabetScrollbar(
+        AlphabetList(
           items: _sortedItems,
-          alphabetScrollbarOptions: widget.options.scrollbarOptions,
-          symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+          scrollController: _scrollController,
+          alphabetListOptions: widget.options.listOptions,
           symbolChangeNotifierList: _symbolChangeNotifierList,
+          symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+        ),
+        AlphabetSymbolOverlay(
+          alphabetOverlayOptions: widget.options.overlayOptions,
+          symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+        ),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: AlphabetScrollbar(
+              items: _sortedItems,
+              alphabetScrollbarOptions: widget.options.scrollbarOptions,
+              symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+              symbolChangeNotifierList: _symbolChangeNotifierList,
+            ),
+          ),
         ),
       ],
     );
